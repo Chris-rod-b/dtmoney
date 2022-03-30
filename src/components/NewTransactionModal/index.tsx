@@ -31,14 +31,20 @@ export function NewTransactionModal ( {  isOpen, onRequestClose, ...props} : New
         setCategory('');
     }
 
-    function handleCreateNewTransaction(event : React.FormEvent){
+    async function handleCreateNewTransaction(event : React.FormEvent){
         event.preventDefault();
-        createTransaction ({
+        
+        await createTransaction ({
             title,
             amount,
             category,
             type,
         })
+
+        handleSetTypeNull();
+        onRequestClose();
+
+        window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth' });  
     }
 
     return ( 
