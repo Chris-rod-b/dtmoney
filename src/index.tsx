@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import * as ReactDOMClient from 'react-dom/client';
 
 import { createServer, Model } from 'miragejs';
 
@@ -19,7 +19,7 @@ createServer({
           type: 'deposit',
           category: 'Dev',
           amount: 6000,
-          createdAt: new Date('2021-04-03 09:00:00'),
+          createdAt: new Date('2020-04-03').toLocaleDateString('pt-BR', {timeZone: 'UTC'}),
         },
         {
           id: 2,
@@ -27,7 +27,15 @@ createServer({
           type: 'withdraw',
           category: 'Apartamento',
           amount: 900,
-          createdAt: new Date('2021-04-14 11:00:00'),
+          createdAt: new Date('2021-04-14').toLocaleDateString('pt-BR', {timeZone: 'UTC'}),
+        },
+        {
+          id: 3,
+          title: 'iFood',
+          type: 'withdraw',
+          category: 'Serviços',
+          amount: 100,
+          createdAt: new Date('2022-03-25').toLocaleDateString('pt-BR', {timeZone: 'UTC'}),
         }
       ],
     })
@@ -48,9 +56,8 @@ createServer({
   }
 })
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+const container = document.getElementById('root') as Element;
+
+const root = ReactDOMClient.createRoot(container);
+
+root.render(<App/>);
